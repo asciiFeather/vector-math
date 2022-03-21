@@ -3,7 +3,6 @@
 
 import math
 
-
 vx = int(input("vx: "))
 vy = int(input("vy: ")) 
 
