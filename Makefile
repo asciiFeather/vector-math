@@ -1,5 +1,5 @@
 CC = gcc
-CPP_FLAGS = -w -O2 -Ilib/
+CPP_FLAGS = -w -O2 -Ilib/ -lm -Wextra 
 
 .PHONY: bin clean run
 
