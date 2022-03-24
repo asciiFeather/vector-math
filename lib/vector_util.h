@@ -7,7 +7,7 @@
 
 #include "v_types.h"
 
-float sqr(float n) {
+int sqr(int n) {
     return n*n;
 }
 
@@ -17,27 +17,22 @@ float distance(Vec3* p_va) {
 }
 
 float normalize(Vec3* p_va) {
-    float n;
-    p_va->x / distance(p_va); p_va->y / distance(p_va); p_va->z / distance(p_va);
-    return n;
+    float x = p_va->x / distance(p_va); 
+    float y = p_va->y / distance(p_va); 
+    float z = p_va->z / distance(p_va);
+    float n[3] = {x, y, z};
+    return *((float*) &n);
 }
 
-// lighting calculations and helper for raycasted raytracers.
-// get multiplicative inverse (reciprocal) of sqrt
-// -> q3-arena fast inverse sqrt method.
-float F_InverseSqrt(float n) {
-    long i; float x2, y;
-    const float threehalfs_rc = 1.5f;
+// small angle approximations 0.x small
+double FastSin(double theta) {return theta;} 
+double FastCos(double theta) {return 1 - (sqr(theta)/2);} 
+double FastTan(double theta) {return theta;}
 
-    x2 = n * 0.5f; y = n;
-    i = * (long*) &y;           // type-cast
-    i = 0x5f3759df - (i >> 1); // 0x5f3759df = hex magic for equations like these.. bitshift it by 1 get important value checksum stuff
-    y = * (float*) &i;
-    y = y * (threehalfs_rc - (x2 * y * y)); // 1st inverse iteration.
-
-    return y;
+// using newtons rhapson method :)
+// IEEE single digit precision type
+int FastSqrt(int number) {
 }
-
 
 
 #endif
